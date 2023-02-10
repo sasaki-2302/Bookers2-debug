@@ -9,8 +9,9 @@ class BooksController < ApplicationController
   def index
     @now = Time.current
     # 1週間を定義
-    from  = Time.current.at_beginning_of_day
-    to  = (from + 6.day).at_end_of_day
+    to  = Time.current.at_end_of_day
+    from  = (to - 6.day).at_beginning_of_day
+    
     # Bookモデルより全データを取得、1週間のいいね数で降順で並び替える
     @books = Book.all.sort {|a,b| b.favorite.where(created_at: from...to).size <=> a.favorite.where(created_at: from...to).size}
     @book = Book.new

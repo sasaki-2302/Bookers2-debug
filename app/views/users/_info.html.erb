@@ -10,21 +10,25 @@
   </tr>
   <tr>
     <th>followings</th>
-    <th><%= link_to user.followings.count, user_followings_path(user) %></th>
+    <th id="followings_count<%= user.id %>"><%= render "relationships/followings_count", user: user %></th>
+  </tr>
   </tr>
   <tr>
     <th>followers</th>
-    <th><%= link_to user.followers.count, user_followers_path(user) %></th>
+    <th id="followers_count<%= user.id %>"><%= render "relationships/followers_count", user: user %></th>
   </tr>
 </table>
 
 <div class="btn-toolbar">
   <div class="btn-group">
     <% unless user == current_user %>
-      <% if current_user.following?(user) %>
-        <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete, class: "btn btn-danger btn-sm" %>
+      <div id="follow<%= user.id %>">
+        <%= render "relationships/follow_btn", user: user %>
+      </div>
+      <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
+        <%= link_to 'chatを始める', chat_path(user.id), class: "btn btn-primary btn-sm" %>
       <% else %>
-        <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-success btn-sm" %>
+        <button type="button" class="btn btn-sm btn-secondary" disabled>chatを始める</button>
       <% end %>
     <% end %>
   </div>

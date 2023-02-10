@@ -1,5 +1,4 @@
 <% if users.exists? %>
-  <% users.each do |user| %>
     <table class="table">
       <thead>
         <tr>
@@ -10,6 +9,7 @@
           <th></th>
         </tr>
       </thead>
+      <% users.each do |user| %>
       <tbody>
         <tr>
           <td><%= link_to user do%>
@@ -20,8 +20,8 @@
           <td>フォロワー数: <%= user.followers.count %></td>
         </tr>
       </tbody>
+      <% end %>
     </table>
-  <% end %>
 <% else %>
   <p>ユーザーはいません</p>
 <% end %>
