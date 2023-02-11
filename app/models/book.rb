@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   has_many :favorite, dependent: :destroy
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
+  is_impressionable :actions => [:show]
 
   def favorited_by?(user)
     favorite.exists?(user_id: user.id)

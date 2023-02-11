@@ -7,6 +7,7 @@
       <th>Opinion</th>
       <th>Favorite</th>
       <th>Comment</th>
+      <th>PV_count</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,7 @@
           <%= render "favorites/favorite_btn", book: book %>
         </td>
         <td>Comment:<%= book.book_comments.count %></td>
+        <td>閲覧数:<%= book.impressionist_count %></td>
       </tr>
     <% end %>
   </tbody>
