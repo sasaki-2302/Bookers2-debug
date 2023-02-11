@@ -15,6 +15,8 @@ import "../stylesheets/application"
 
 require("channels")
 require("jquery")
+require("chartkick")
+require("chart.js")
 
 Rails.start()
 Turbolinks.start()
