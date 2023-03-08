@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2023_03_08_031144) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "star"
+    t.float "rate"
   end
 
   create_table "chats", force: :cascade do |t|
