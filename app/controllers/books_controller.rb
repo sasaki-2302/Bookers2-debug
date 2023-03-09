@@ -13,8 +13,18 @@ class BooksController < ApplicationController
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
 
-    # Bookモデルより全データを取得、1週間のいいね数で降順で並び替える
-    @books = Book.all.sort {|a,b| b.favorite.where(created_at: from...to).size <=> a.favorite.where(created_at: from...to).size}
+    if params[:latest]
+      @books = Book.latest
+    elsif params[:old]
+      @books = Book.old
+    elsif params[:rate_count]
+      @books = Book.rate_count
+    elsif params[:favorite_count]
+      # Bookモデルより全データを取得、1週間のいいね数で降順で並び替える
+      @books = Book.all.sort {|a,b| b.favorite.where(created_at: from...to).size <=> a.favorite.where(created_at: from...to).size}
+    else
+      @books = Book.all
+    end
     @book = Book.new
   end
 
