@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   has_many :favorite, dependent: :destroy
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
+  validates :tag, presence:true
   is_impressionable :actions => [:show]
 
   scope :created_today, -> { where(created_at: Time.zone.now.all_day) }
@@ -27,6 +28,8 @@ class Book < ApplicationRecord
   def self.search_for(content, method)
     if method == 'perfect'
       Book.where(title: content)
+    elsif method == 'tag_perfect'
+      Book.where(tag: content)
     elsif method == 'forward'
       Book.where('title LIKE ?', content+'%')
     elsif method == 'backward'
